@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use Illuminate\Http\Request;
+use App\Http\Middleware\CheckUnique;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('form', function (Request $request) {
+    $token = $request->session()->token();
+    $token = csrf_token();
+    return view('form');
+});
+Route::post('/form/send',[PostController::class,'create'])->middleware('checkUnique');
+
+Route::get('/posts/all',[PostController::class,'store'])->name('contact-data');
