@@ -24,6 +24,8 @@
     <input type="text" name="title" value="{{ old('title') }}">
     <label for="text">Text</label>
     <input type="text" name="text">
+    <label for="images">Image</label>
+    <input type="file" name="images">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <button type="submit">Submit</button>
 </form>

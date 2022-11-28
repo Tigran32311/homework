@@ -15,6 +15,9 @@
         <td>
             Text
         </td>
+        <td>
+            Image
+        </td>
     </tr>
     @foreach($data as $item)
             <tr>
@@ -23,6 +26,10 @@
                 </td>
                 <td>
                     {{$item->text}}
+                </td>
+                <td>
+{{--                    <img src="{{Storage::url($item->image)}}" width="100">--}}
+                    <img src="data:image/png;charset=utf8;base64,{{base64_encode($item->images)}}">
                 </td>
             </tr>
     @endforeach

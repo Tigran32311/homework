@@ -13,7 +13,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->text = $request->input('text');
-
+        $post->images = $request->input('images');
         $post->save();
 
         return redirect()->route('contact-data');
