@@ -25,6 +25,6 @@ Route::get('form', function (Request $request) {
     $token = csrf_token();
     return view('form');
 });
-Route::post('/form/send',[PostController::class,'create'])->middleware('checkUnique');
+Route::post('/form/send',[PostController::class,'create']);
 
 Route::get('/posts/all',[PostController::class,'store'])->name('contact-data');
