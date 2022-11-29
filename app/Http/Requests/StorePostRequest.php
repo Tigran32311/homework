@@ -26,6 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'title'=>'required|unique:posts|max:255',
             'text'=>'required',
+//            'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

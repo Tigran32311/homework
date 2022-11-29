@@ -28,8 +28,7 @@
                     {{$item->text}}
                 </td>
                 <td>
-{{--                    <img src="{{Storage::url($item->image)}}" width="100">--}}
-                    <img src="data:image/png;charset=utf8;base64,{{base64_encode($item->images)}}">
+                    <img src="{{url('images/'.$item->images)}}" alt="" width="100">
                 </td>
             </tr>
     @endforeach
