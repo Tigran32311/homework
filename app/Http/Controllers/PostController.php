@@ -8,8 +8,16 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
+/**
+ *
+ */
 class PostController extends Controller
 {
+    /**
+     * Получение данных с формы, обработка данных и отправка в БД
+     * @param StorePostRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function create(StorePostRequest $request)
     {
         $post = new Post();
@@ -22,11 +30,9 @@ class PostController extends Controller
         }
 
 
-//        $file->move(public_path().$destinationPath,$filename);
 
         $post->title = $request->input('title');
         $post->text = $request->input('text');
-//        $post->images = $request->input('images');
         $post->images = $request->file('images')->getClientOriginalName();
 
             $post->save();
@@ -34,6 +40,10 @@ class PostController extends Controller
         return redirect()->route('contact-data');
     }
 
+    /**
+     * Функция для вывода данных из БД на blade шаблон
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function store()
     {
         return view('postsAll', ['data' => Post::all()]);
