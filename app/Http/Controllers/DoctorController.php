@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Specialization;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use PhpParser\Comment\Doc;
 
 class DoctorController extends Controller
 {
@@ -29,5 +31,18 @@ class DoctorController extends Controller
 
         $list = $doctors->getDoctorsExp();
         return view('DoctorList',['list'=>$list]);
+    }
+
+    /**
+     * Метод реализующий вывод всех докторов по специализации педиатор
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function getDoctorswithSpec()
+    {
+        $doctors = new Doctor();
+        $list = $doctors->getDoctorswithSpec();
+
+        return view('DoctorList',['list'=>$list]);
+
     }
 }

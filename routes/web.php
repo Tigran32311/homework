@@ -21,3 +21,5 @@ Route::get('/doctors/all',[\App\Http\Controllers\DoctorController::class,'getDoc
 
 Route::get('/doctors/getExp',[\App\Http\Controllers\DoctorController::class,'getDoctorsExp']);
 
+Route::get('/doctors/getSpec',[\App\Http\Controllers\DoctorController::class,'getDoctorswithSpec']);
+

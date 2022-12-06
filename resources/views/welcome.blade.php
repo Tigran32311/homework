@@ -16,5 +16,9 @@
     <button type="submit">Get doctors, who Expirience > 5 years</button>
 </form>
 
+<form action="/doctors/getSpec">
+    <button type="submit">Get doctors, who Expirience > 5 years</button>
+</form>
+
 </body>
 </html>
