@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Создание таблицы "Специализация"
      * Run the migrations.
      *
      * @return void

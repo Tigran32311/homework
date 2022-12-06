@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/doctors/all',[\App\Http\Controllers\DoctorController::class,'getDoctors']);
+
+Route::get('/doctors/getExp',[\App\Http\Controllers\DoctorController::class,'getDoctorsExp']);
+
