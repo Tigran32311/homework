@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             //Название должности
-            $table->string('Post_name');
+            $table->string('post_name');
             //Зарплата
-            $table->string('Salary');
+            $table->string('salary');
             $table->timestamps();
         });
     }

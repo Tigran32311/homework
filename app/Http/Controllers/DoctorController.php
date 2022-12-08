@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
@@ -41,7 +42,6 @@ class DoctorController extends Controller
     {
         $doctors = new Doctor();
         $list = $doctors->getDoctorswithSpec();
-
         return view('DoctorList',['list'=>$list]);
 
     }

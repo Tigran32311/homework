@@ -2,30 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\RelationsTrait;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Comment\Doc;
+use Illuminate\Support\Facades\DB;
+
 
 class Doctor extends Model
 {
+    //Подключение трейта
+    use RelationsTrait;
+
     /**
      * Запрос на получение всех докторов
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getDoctorsList()
     {
-        return $doctors = Doctor::all();
-    }
+        //было Doctor::all()
 
-    /**
-     * Запрос на получение всех докторов ,у которых опыт работы больше 5 лет
-     * @return mixed
-     */
-    public function getDoctorsExp()
-    {
-        return $doctors = Doctor::where('Expirience', '>', 5)
-            ->orderBy('Surname')
+        //использование жадной загрузки (нерабочее). связь 'posts' наследуется от трейта 'RelationsTrait'
+        $doc =  Doctor::with('posts:post_name')->get();
+
+
+        //Использование JOIN
+        $doc = DB::table('doctors')
+            ->join('posts','posts.id','=','doctors.post_id')
+            ->join('specializations','specializations.id','=','doctors.specialization_id')
+            ->select('doctors.name','doctors.surname','doctors.expirience','posts.post_name','posts.salary','specializations.specialization_name')
             ->get();
+
+        return $doc;
     }
 
     /**
@@ -34,13 +40,11 @@ class Doctor extends Model
      */
     public function getDoctorswithSpec()
     {
-        $doctors = new Doctor();
-        $spec = new Specialization();
-        $spec = Specialization::where('Specialization_name', '=', 'Педиатор')->get('id');
-        $doctors = Doctor::where('Specialization_id', Specialization::where('Specialization_name','Педиатор')
-            ->first()->id)
+        //Использование JOIN
+        $doctors = DB::table('doctors')
+            ->join('specializations','specializations.specialization_name','=','Педиатор')
+            ->select('doctors.name','doctors.surname','doctors.expirience','specializations.specialization_name')
             ->get();
-
         return $doctors;
     }
 }

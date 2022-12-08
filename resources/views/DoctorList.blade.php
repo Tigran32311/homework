@@ -29,22 +29,43 @@
     @foreach($list as $item)
         <tr>
             <td>
-                {{$item->Name}}
+                {{$item->name}}
             </td>
             <td>
-                {{$item->Surname}}
+                {{$item->surname}}
             </td>
             <td>
-                {{$item->Expirience}}
+                {{$item->expirience}}
             </td>
             <td>
-                {{$item->Specialization_id}}
+                {{$item->specialization_name}}
             </td>
             <td>
-                {{$item->Post_id}}
+                {{--{{$item->post_id}}--}}
+                {{$item->post_name}}
             </td>
         </tr>
     @endforeach
+    {{--@foreach($list2 as $item)
+        <tr>
+            <td>
+                {{$item->name}}
+            </td>
+            <td>
+                {{$item->surname}}
+            </td>
+            <td>
+                {{$item->expirience}}
+            </td>
+            <td>
+                {{$item->specialization_name}}
+            </td>
+            <td>
+                --}}{{--{{$item->post_id}}--}}{{--
+                {{$item->post_name}}
+            </td>
+        </tr>
+    @endforeach--}}
 </table>
 </body>
 </html>

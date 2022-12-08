@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Doctor;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+ /* Route::get('/', function () {
+    $doctor = new Doctor();
+    var_dump($doctor->getDoctorsList()->toArray());
+    return view('welcome');
+});*/
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +32,6 @@ Route::get('/doctors/getExp',[\App\Http\Controllers\DoctorController::class,'get
 
 Route::get('/doctors/getSpec',[\App\Http\Controllers\DoctorController::class,'getDoctorswithSpec']);
 
+Route::get('/doctors/getPost',[\App\Http\Controllers\DoctorController::class,'getDoctorsPost']);
+
+Route::get('/doctors/getAllPost',[\App\Http\Controllers\PostController::class,'getPosts']);

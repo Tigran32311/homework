@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::table('doctors', function (Blueprint $table) {
             //Вторичные ключи, для id из таблиц "specializations" и "posts"
-            $table->foreignId('Specialization_id')->references('id')->on('specializations');
-            $table->foreignId('Post_id')->references('id')->on('posts');
+            $table->foreignId('specialization_id')->references('id')->on('specializations');
+            $table->foreignId('post_id')->references('id')->on('posts');
         });
     }
 

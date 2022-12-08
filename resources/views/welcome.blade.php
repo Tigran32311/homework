@@ -17,8 +17,13 @@
 </form>
 
 <form action="/doctors/getSpec">
-    <button type="submit">Get doctors, who Expirience > 5 years</button>
+    <button type="submit">Get doctors, who Specialization is "Педиатрия"</button>
 </form>
+
+<form action="/doctors/getPost">
+    <button type="submit">Get doctors, posts</button>
+</form>
+
 
 </body>
 </html>
