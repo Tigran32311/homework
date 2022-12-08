@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Specialization extends Model
 {
@@ -15,7 +16,9 @@ class Specialization extends Model
      */
     public function getAllSpec()
     {
-        //Использование жадной загрузки (рабочее)
-        return Specialization::with('doctors:name')->get();
+        $spec = Cache::remember('specialization',now()->addMinutes(150), function () {
+            return Specialization::with('doctors:name')->get();
+        });
+        return $spec;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\RelationsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 
 class Doctor extends Model
@@ -18,20 +19,17 @@ class Doctor extends Model
      */
     public function getDoctorsList()
     {
-        //было Doctor::all()
 
-        //использование жадной загрузки (нерабочее). связь 'posts' наследуется от трейта 'RelationsTrait'
-        $doc =  Doctor::with('posts:post_name')->get();
+        $doctor = Cache::remember('doctors',now()->addMinutes(150),function (){
+            $doc = DB::table('doctors')
+                ->join('posts','posts.id','=','doctors.post_id')
+                ->join('specializations','specializations.id','=','doctors.specialization_id')
+                ->select('doctors.name','doctors.surname','doctors.expirience','posts.post_name','posts.salary','specializations.specialization_name')
+                ->get();
+            return $doc;
+        });
 
-
-        //Использование JOIN
-        $doc = DB::table('doctors')
-            ->join('posts','posts.id','=','doctors.post_id')
-            ->join('specializations','specializations.id','=','doctors.specialization_id')
-            ->select('doctors.name','doctors.surname','doctors.expirience','posts.post_name','posts.salary','specializations.specialization_name')
-            ->get();
-
-        return $doc;
+        return $doctor;
     }
 
     /**
@@ -40,11 +38,15 @@ class Doctor extends Model
      */
     public function getDoctorswithSpec()
     {
-        //Использование JOIN
-        $doctors = DB::table('doctors')
-            ->join('specializations','specializations.specialization_name','=','Педиатор')
-            ->select('doctors.name','doctors.surname','doctors.expirience','specializations.specialization_name')
-            ->get();
-        return $doctors;
+        $doctor = Cache::remember('spec',now()->addMinutes(150), function () {
+            $doctors = DB::table('doctors')
+                ->join('specializations','specializations.specialization_name','=','Педиатор')
+                ->select('doctors.name','doctors.surname','doctors.expirience','specializations.specialization_name')
+                ->get();
+            return $doctors;
+        });
+        return $doctor;
     }
+
+
 }

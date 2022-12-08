@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Traits\RelationsTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
@@ -16,7 +17,9 @@ class Post extends Model
      */
     public function getAllposts()
     {
-    //Использование жадной загрузки (рабочее)
-    return Post::with('doctors:name')->where('post_ name','Доктор')->get();
+        $post = Cache::remember('post',now()->addMinutes(150), function () {
+            return Post::with('doctors:name')->where('post_name','Доктор')->get();
+        });
+        return $post;
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\Redis;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,12 +28,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/doctors/all',[\App\Http\Controllers\DoctorController::class,'getDoctors']);
+//Просто вывод кэша в json
+Route::get('/publish', function () {
+    return \Illuminate\Support\Facades\Cache::get('doctors');
+});
+//Просто вывод кэша в json
+Route::get('/publish2', function () {
+    return \Illuminate\Support\Facades\Cache::get('post');
+});
+//Просто вывод кэша в json
+Route::get('/publish3', function () {
+    return \Illuminate\Support\Facades\Cache::get('specialization');
+});
 
-Route::get('/doctors/getExp',[\App\Http\Controllers\DoctorController::class,'getDoctorsExp']);
+Route::get('/doctors/all',[\App\Http\Controllers\DoctorController::class,'getDoctors']);
 
 Route::get('/doctors/getSpec',[\App\Http\Controllers\DoctorController::class,'getDoctorswithSpec']);
 
-Route::get('/doctors/getPost',[\App\Http\Controllers\DoctorController::class,'getDoctorsPost']);
-
-Route::get('/doctors/getAllPost',[\App\Http\Controllers\PostController::class,'getPosts']);
+Route::get('/doctors/getPost',[\App\Http\Controllers\PostController::class,'getPosts']);
